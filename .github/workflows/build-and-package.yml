@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # Required to create releases
+      contents: write # Required to create releases
 
     steps:
       - name: Checkout Code
@@ -32,26 +32,6 @@ jobs:
           echo "🔨 Building project with obfuscation..."
           npm run build
           echo "✅ Build completed"
-
-      - name: Verify Build
-        run: |
-          echo "🔍 Verifying build output..."
-
-          # Count files
-          JS_COUNT=$(find dist -name "*.js" | wc -l)
-          MAP_COUNT=$(find dist -name "*.js.map" | wc -l)
-
-          echo "📊 Build statistics:"
-          echo "  - JavaScript files: $JS_COUNT"
-          echo "  - Source map files: $MAP_COUNT"
-          echo "  - Dist size: $(du -sh dist | cut -f1)"
-
-          # Verify obfuscation
-          if grep -q "_0x" dist/index.js; then
-            echo "✅ Code is obfuscated"
-          else
-            echo "⚠️  Warning: Code might not be obfuscated"
-          fi
 
       - name: Prepare Production Files
         run: |
