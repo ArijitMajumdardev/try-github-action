@@ -14,8 +14,8 @@ build/
 *.js.map
 
 # Source map archives
-sourcemaps-*.zip
-production-artifact/
+sourcemaps
+production-files/
 sourcemaps-package/
 
 # Backup directories

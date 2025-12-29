@@ -22,7 +22,7 @@ const path = require('path');
  * @param {string} distDir - Directory containing the dist files and source maps
  * @returns {Promise<Array>} Array of translated stack frames
  */
-async function translateStackTrace(stackTrace, distDir = './dist') {
+async function translateStackTrace(stackTrace, distDir = './sourcemaps') {
   const lines = stackTrace.split('\n');
   const results = [];
 
