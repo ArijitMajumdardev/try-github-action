@@ -12,7 +12,7 @@ const userController = (req:any, res:any, next:any) => {
       const { city } = req.query;
       console.log(city)
     // const filteredUsers = city.length
-    throw new Error("Test error");
+    throw new Error("Test error X0asibai");
     // const avgAge = filteredUsers.reduce((sum:any, u:any) => sum + u.age, 0) / filteredUsers.length;
 
     res.json({

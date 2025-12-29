@@ -271,7 +271,7 @@ async function main() {
     console.log('Translating stack trace...\n');
 
     // Translate the stack trace
-    const results = await translateStackTrace(stackTrace, './dist');
+    const results = await translateStackTrace(stackTrace, './sourcemaps');
 
     // Print results
     printResults(results);
