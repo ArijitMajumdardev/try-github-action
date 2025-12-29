@@ -1,0 +1,32 @@
+{
+  "name": "smaple",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec tsc src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "obfuscate": "npx javascript-obfuscator dist --output dist --config obfuscator.config.json && node scripts/fix-sourcemaps.js",
+    "build:dev": "tsc",
+    "translate": "ts-node tools/cli.ts --source-map-dir ./dist --interactive",
+    "translate:help": "ts-node tools/cli.ts --help",
+    "build": "node scripts/build-with-sourcemaps.cjs",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "source-map": "^0.7.6"
+  },
+  "devDependencies": {
+    "@bytehide/shield-cli": "^1.0.5",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.3",
+    "javascript-obfuscator": "^5.1.0",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

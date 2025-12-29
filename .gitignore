@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Source maps (stored separately in GitHub Releases)
+*.js.map
+
+# Source map archives
+sourcemaps-*.zip
+production-artifact/
+sourcemaps-package/
+
+# Backup directories
+dist-sourcemaps-backup/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Test coverage
+coverage/
+*.lcov
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Lock files (choose one based on your package manager)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

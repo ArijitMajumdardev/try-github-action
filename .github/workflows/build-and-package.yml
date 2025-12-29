@@ -1,0 +1,81 @@
+name: Build and Package
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  build:
+    name: Build and Create Artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        run: |
+          echo "🔨 Building project..."
+          npm run build
+          echo "✅ Build completed"
+
+      - name: Prepare Production Files
+        run: |
+          echo "📦 Preparing production files (without source maps)..."
+          mkdir -p production-files
+          cp dist/*.js production-files/
+
+          # Verify no source maps in production
+          if ls production-files/*.map 2>/dev/null; then
+            echo "❌ Error: Source maps found in production files!"
+            exit 1
+          fi
+
+          echo "✅ Production files ready:"
+          ls -lh production-files/
+
+      - name: Create Source Maps Archive
+        run: |
+          echo "🗜️ Creating source maps archive..."
+          mkdir -p sourcemaps-package
+
+          # Copy source maps only
+          cp dist/*.js.map sourcemaps-package/
+
+          # Create zip
+          cd sourcemaps-package
+          zip -r ../sourcemaps.zip . -q
+          cd ..
+
+          echo "✅ Source maps archive created:"
+          ls -lh sourcemaps.zip
+
+      - name: Upload Production Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-files
+          path: production-files/
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Upload Source Maps
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourcemaps
+          path: sourcemaps.zip
+          retention-days: 90
+          if-no-files-found: error
