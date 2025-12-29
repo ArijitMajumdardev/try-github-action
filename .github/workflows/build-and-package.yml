@@ -48,21 +48,14 @@ jobs:
           echo "✅ Production files ready:"
           ls -lh production-files/
 
-      - name: Create Source Maps Archive
+      - name: Prepare Source Maps
         run: |
-          echo "🗜️ Creating source maps archive..."
+          echo "📋 Preparing source maps..."
           mkdir -p sourcemaps-package
-
-          # Copy source maps only
           cp dist/*.js.map sourcemaps-package/
 
-          # Create zip
-          cd sourcemaps-package
-          zip -r ../sourcemaps.zip . -q
-          cd ..
-
-          echo "✅ Source maps archive created:"
-          ls -lh sourcemaps.zip
+          echo "✅ Source maps ready:"
+          ls -lh sourcemaps-package/
 
       - name: Upload Production Files
         uses: actions/upload-artifact@v4
@@ -76,6 +69,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sourcemaps
-          path: sourcemaps.zip
+          path: sourcemaps-package/
           retention-days: 90
           if-no-files-found: error
