@@ -66,8 +66,8 @@ async function main() {
     console.log('🔨 Building TypeScript with source maps...');
 
     // Step 1: Build TypeScript (generates .js and .js.map files)
-    console.log('  → Running tsc && tsc-alias...');
-    execSync('tsc && tsc-alias', { stdio: 'inherit' });
+    console.log('  → Running tsc');
+    execSync('tsc', { stdio: 'inherit' });
 
     console.log('\n💾 Backing up TypeScript source maps...');
 
